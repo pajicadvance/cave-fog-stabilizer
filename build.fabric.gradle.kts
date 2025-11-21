@@ -7,7 +7,7 @@ platform {
 	loader = "fabric"
 	dependencies {
 		required("minecraft") {
-			versionRange = prop("deps.minecraft")
+			versionRange = prop("deps.minecraft").replace("pre", "beta.")
 		}
 		required("fabric-api") {
 			slug("fabric-api")
@@ -16,34 +16,29 @@ platform {
 		required("fabricloader") {
 			versionRange = ">=${libs.fabric.loader.get().version}"
 		}
+		required("fzzy_config") {
+			versionRange = "*"
+		}
 		optional("modmenu") {}
 	}
 }
 
 loom {
 	accessWidenerPath = rootProject.file("src/main/resources/${prop("mod.id")}.accesswidener")
-	runs.named("client") {
-		client()
-		ideConfigGenerated(true)
-		runDir = "run/"
-		environment = "client"
-		programArgs("--username=Dev")
-		configName = "Fabric Client"
-	}
-	runs.named("server") {
-		server()
-		ideConfigGenerated(true)
-		runDir = "run/"
-		environment = "server"
-		configName = "Fabric Server"
+}
+
+stonecutter {
+	replacements.string {
+		direction = eval(current.version, ">1.21.10")
+		replace("ResourceLocation", "Identifier")
 	}
 }
 
-fabricApi {
-	configureDataGeneration() {
-		outputDirectory = file("${rootDir}/versions/datagen/${stonecutter.current.version.split("-")[0]}/src/main/generated")
-		client = true
-	}
+repositories {
+	maven("https://maven.fzzyhmstrs.me/") { name = "Fzzy Config" }
+	maven("https://maven.terraformersmc.com/" ) { name = "TerraformersMC" }
+	maven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
+	maven("https://jitpack.io") { name = "Jitpack" }
 }
 
 dependencies {
@@ -55,4 +50,14 @@ dependencies {
 		})
 	modImplementation(libs.fabric.loader)
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
+	modImplementation("me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}")
+	modImplementation("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
+	implementation("com.moulberry:mixinconstraints:${prop("deps.mixinconstraints")}")
+	include("com.moulberry:mixinconstraints:${prop("deps.mixinconstraints")}")
+	modImplementation("com.github.ramixin:mixson-fabric:${prop("deps.mixson")}") {
+		exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
+	}
+	include("com.github.ramixin:mixson-fabric:${prop("deps.mixson")}") {
+		exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
+	}
 }

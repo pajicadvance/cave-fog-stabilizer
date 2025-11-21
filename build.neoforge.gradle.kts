@@ -12,6 +12,16 @@ platform {
 		required("neoforge") {
 			forgeVersionRange = "[1,)"
 		}
+		required("fzzy_config") {
+			forgeVersionRange = "[1,)"
+		}
+	}
+}
+
+stonecutter {
+	replacements.string {
+		direction = eval(current.version, ">1.21.10")
+		replace("ResourceLocation", "Identifier")
 	}
 }
 
@@ -44,11 +54,20 @@ neoForge {
 			sourceSet(sourceSets["main"])
 		}
 	}
-	sourceSets["main"].resources.srcDir("${rootDir}/versions/datagen/${stonecutter.current.version.split("-")[0]}/src/main/generated")
+}
+
+repositories {
+	maven("https://maven.fzzyhmstrs.me/") { name = "Fzzy Config" }
+	maven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
+	maven("https://jitpack.io") { name = "Jitpack" }
 }
 
 dependencies {
-
+	implementation( "me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}+neoforge")
+	implementation("com.moulberry:mixinconstraints:${prop("deps.mixinconstraints")}")
+	jarJar("com.moulberry:mixinconstraints:${prop("deps.mixinconstraints")}")
+	implementation("com.github.ramixin:mixson-neoforge:${prop("deps.mixson")}")
+	jarJar("com.github.ramixin:mixson-neoforge:${prop("deps.mixson")}")
 }
 
 tasks.named("createMinecraftArtifacts") {

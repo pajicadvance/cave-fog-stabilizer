@@ -14,6 +14,16 @@ for (version in stonecutter.versions.map { it.version }.distinct()) tasks.regist
 	dependsOn(stonecutter.tasks.named("publishMods") { metadata.version == version })
 }
 
+tasks.register("Run active Fabric client") {
+	group = "fabric"
+	dependsOn(":${stonecutter.current?.project}:runClient")
+}
+
+tasks.register("Run active Fabric server") {
+	group = "fabric"
+	dependsOn(":${stonecutter.current?.project}:runServer")
+}
+
 stonecutter tasks {
 	val ordering = versionComparator.thenComparingInt { task ->
 		if (task.metadata.project.endsWith("fabric")) 1 else 0
