@@ -5,6 +5,8 @@ This is a fork of [rotgruengelb's Stonecutter Mod Template](https://github.com/r
 Differences from original template:
 
 - Enabled Parchment mappings.
+- Added automatic mixin registration.
+  - Mixins no longer need to be manually added to the mixin config. By default, they're added as common mixins (both server and client side). To make a mixin client side only, use the following annotation: `@MixinEnvironment(type = MixinEnvironment.Env.CLIENT)`.
 - Added versioned access wideners and access transformers.
   - All AWs and ATs are stored in `src/main/resources/aw`. To add an AW/AT for a version, create a new file in that folder, for example `1.21.1.accesswidener` or `1.21.1.cfg`.
 - Added versioned resources.
