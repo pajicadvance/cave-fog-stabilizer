@@ -1,6 +1,9 @@
 plugins {
 	id("mod-platform")
 	id("net.neoforged.moddev")
+	id("dev.kikugie.fletching-table") version "0.1.0-alpha.22"
+	kotlin("jvm") version "2.2.10"
+	id("com.google.devtools.ksp") version "2.2.10-2.0.2"
 }
 
 platform {
@@ -13,20 +16,44 @@ platform {
 			forgeVersionRange = "[1,)"
 		}
 		required("fzzy_config") {
-			forgeVersionRange = "[1,)"
+			forgeVersionRange = "[0,)"
 		}
 	}
 }
 
 stonecutter {
+	val dir = eval(current.version, ">1.21.10")
 	replacements.string {
-		direction = eval(current.version, ">1.21.10")
-		replace("ResourceLocation", "Identifier")
+		direction = dir
+		replace(".ResourceLocation", ".Identifier")
+	}
+	replacements.string {
+		direction = dir
+		replace("ResourceLocation.", "Identifier.")
+	}
+	replacements.string {
+		direction = dir
+		replace("<ResourceLocation", "<Identifier")
+	}
+	replacements.string {
+		direction = dir
+		replace(" ResourceLocation ", " Identifier ")
+	}
+}
+
+fletchingTable {
+	mixins.create("main") {
+		mixin("default", "${prop("mod.id")}.mixins.json")
 	}
 }
 
 neoForge {
 	version = property("deps.neoforge") as String
+	val at = when {
+		stonecutter.eval(stonecutter.current.version, "1.21.10") -> "1.21.10.cfg"
+		else -> "1.21.1.cfg"
+	}
+	accessTransformers.from(rootProject.file("src/main/resources/aw/$at"))
 	validateAccessTransformers = true
 
 	if (hasProperty("deps.parchment")) parchment {
@@ -57,9 +84,14 @@ neoForge {
 }
 
 repositories {
+	maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
 	maven("https://maven.fzzyhmstrs.me/") { name = "Fzzy Config" }
 	maven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
 	maven("https://jitpack.io") { name = "Jitpack" }
+	exclusiveContent {
+		forRepository { maven("https://api.modrinth.com/maven") { name = "Modrinth" } }
+		filter { includeGroup("maven.modrinth") }
+	}
 }
 
 dependencies {

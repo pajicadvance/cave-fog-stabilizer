@@ -1,6 +1,9 @@
 plugins {
 	id("mod-platform")
 	id("fabric-loom")
+	id("dev.kikugie.fletching-table") version "0.1.0-alpha.22"
+	kotlin("jvm") version "2.2.10"
+	id("com.google.devtools.ksp") version "2.2.10-2.0.2"
 }
 
 platform {
@@ -24,25 +27,70 @@ platform {
 }
 
 loom {
-	accessWidenerPath = rootProject.file("src/main/resources/${prop("mod.id")}.accesswidener")
+	val aw = when {
+		stonecutter.eval(stonecutter.current.version, "1.21.11-pre1") -> "1.21.11-pre1.accesswidener"
+		stonecutter.eval(stonecutter.current.version, "1.21.10") -> "1.21.10.accesswidener"
+		else -> "1.21.1.accesswidener"
+	}
+	accessWidenerPath = rootProject.file("src/main/resources/aw/$aw")
+	runs.named("client") {
+		client()
+		ideConfigGenerated(true)
+		runDir = "run/"
+		environment = "client"
+		programArgs("--username=Dev")
+		configName = "Fabric Client"
+	}
+	runs.named("server") {
+		server()
+		ideConfigGenerated(true)
+		runDir = "run/"
+		environment = "server"
+		configName = "Fabric Server"
+	}
 }
 
 stonecutter {
+	val dir = eval(current.version, ">1.21.10")
 	replacements.string {
-		direction = eval(current.version, ">1.21.10")
-		replace("ResourceLocation", "Identifier")
+		direction = dir
+		replace(".ResourceLocation", ".Identifier")
+	}
+	replacements.string {
+		direction = dir
+		replace("ResourceLocation.", "Identifier.")
+	}
+	replacements.string {
+		direction = dir
+		replace("<ResourceLocation", "<Identifier")
+	}
+	replacements.string {
+		direction = dir
+		replace(" ResourceLocation ", " Identifier ")
+	}
+}
+
+fletchingTable {
+	mixins.create("main") {
+		mixin("default", "${prop("mod.id")}.mixins.json")
 	}
 }
 
 repositories {
+	maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
 	maven("https://maven.fzzyhmstrs.me/") { name = "Fzzy Config" }
 	maven("https://maven.terraformersmc.com/" ) { name = "TerraformersMC" }
 	maven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
 	maven("https://jitpack.io") { name = "Jitpack" }
+	exclusiveContent {
+		forRepository { maven("https://api.modrinth.com/maven") { name = "Modrinth" } }
+		filter { includeGroup("maven.modrinth") }
+	}
 }
 
 dependencies {
 	minecraft("com.mojang:minecraft:${prop("deps.minecraft")}")
+	@Suppress("UnstableApiUsage")
 	mappings(
 		loom.layered {
 			officialMojangMappings()
