@@ -20,9 +20,12 @@ platform {
 			versionRange = ">=${libs.fabric.loader.get().version}"
 		}
 		required("fzzy_config") {
+			slug("fzzy-config")
 			versionRange = "*"
 		}
-		optional("modmenu") {}
+		optional("modmenu") {
+			slug("modmenu")
+		}
 	}
 }
 
