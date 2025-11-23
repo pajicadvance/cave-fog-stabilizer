@@ -27,12 +27,7 @@ platform {
 }
 
 loom {
-	val aw = when {
-		stonecutter.eval(stonecutter.current.version, "1.21.11-pre1") -> "1.21.11-pre1.accesswidener"
-		stonecutter.eval(stonecutter.current.version, "1.21.10") -> "1.21.10.accesswidener"
-		else -> "1.21.1.accesswidener"
-	}
-	accessWidenerPath = rootProject.file("src/main/resources/aw/$aw")
+	accessWidenerPath = rootProject.file("src/main/resources/aw/${stonecutter.current.version}.accesswidener")
 	runs.named("client") {
 		client()
 		ideConfigGenerated(true)

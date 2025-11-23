@@ -49,11 +49,7 @@ fletchingTable {
 
 neoForge {
 	version = property("deps.neoforge") as String
-	val at = when {
-		stonecutter.eval(stonecutter.current.version, "1.21.10") -> "1.21.10.cfg"
-		else -> "1.21.1.cfg"
-	}
-	accessTransformers.from(rootProject.file("src/main/resources/aw/$at"))
+	accessTransformers.from(rootProject.file("src/main/resources/aw/${stonecutter.current.version}.cfg"))
 	validateAccessTransformers = true
 
 	if (hasProperty("deps.parchment")) parchment {
