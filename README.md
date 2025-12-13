@@ -1,24 +1,12 @@
-# Multicutter
+# Cave Fog Stabilizer
 
-This is a fork of [rotgruengelb's Stonecutter Mod Template](https://github.com/rotgruengelb/stonecutter-mod-template) altered to fit my specific needs.
+When Mojang added environmental fog to the game, the time of day started affecting how fog looks underground. I thought this didn't make sense, so I made this mod.
 
-Differences from original template:
+This mod prevents fog from being affected by the time of day **only when the player is underground**. This lets you have the new environmental fog on the surface while keeping cave fog unaffected.
 
-- Enabled Parchment mappings.
-- Added automatic mixin registration.
-  - Mixins no longer need to be manually added to the mixin config. By default, they're added as common mixins (both server and client side). To make a mixin client side only, use the following annotation: `@MixinEnvironment(type = MixinEnvironment.Env.CLIENT)`.
-- Added versioned access wideners and access transformers.
-  - All AWs and ATs are stored in `src/main/resources/aw`. To add an AW/AT for a version, create a new file in that folder, for example `1.21.1.accesswidener` or `1.21.1.cfg`.
-- Added versioned resources.
-  - Version specific resources can be placed in `src/main/resources/resourcepacks` in the version specific folders, for example `1_21_1/rp` contains client side assets which are only going to be loaded in 1.21.1.
-  - There is a small mixin that hides these resource packs from resource pack and datapack selection UIs to prevent clutter (see `PackSelectionModelMixin`).
-  - Note that this is implemented for Fabric and NeoForge only.
-- Added dependencies:
-  - Fzzy Config as the config API
-  - Mixson for runtime JSON patching
-  - MixinConstraints for conditional mixin loading
-- Added a few more useful platform methods.
-- Added handling for pre-release versions.
-- Added handling for ResourceLocation -> Identifier rename which occured in 1.21.11.
-  - It's a bit scuffed, but it works. You may need to add additional string replacements in the buildscripts depending on your project.
-- Disabled datagen.
+Check out the Gallery tab for comparison images between this mod, vanilla after environmental fog, and vanilla before environmental fog.
+
+The mod provides a configuration when Fzzy Config is installed, but it's not required for the mod to do its thing. The configuration allows the following:
+- Toggling underground fog stabilization on and off (default enabled, obviously).
+- Changing the time it takes to transition from environmental fog to stabilized fog and vice versa when moving between the surface and underground (default 5 seconds).
+- Changing the color the fog ends up stabilizing to after the transition time passes (default black, identical to what cave fog visuals were before).
