@@ -3,7 +3,9 @@
   "cave_fog_stabilizer.config.stabilizeCaveFog": "Stabilize cave fog",
   "cave_fog_stabilizer.config.stabilizeCaveFog.desc": "Whether to stabilize fog when underground or not.",
   "cave_fog_stabilizer.config.fogTransitionTime": "Fog transition time",
-  "cave_fog_stabilizer.config.fogTransitionTime.desc": "The time in seconds it takes to transition from normal fog to stabilized fog and vice versa when moving between the surface and underground.",
-  "cave_fog_stabilizer.config.stabilizedCaveFogColor": "Stabilized cave fog color",
-  "cave_fog_stabilizer.config.stabilizedCaveFogColor.desc": "The color the fog ends up stabilizing to after the transition time passes."
+  "cave_fog_stabilizer.config.fogTransitionTime.desc": "The time in seconds it takes to transition between fog color changes.",
+  "cave_fog_stabilizer.config.standardCaveFogBrightness": "Standard cave fog brightness",
+  "cave_fog_stabilizer.config.standardCaveFogBrightness.desc": "The brightness of caves which don't have a custom fog color.",
+  "cave_fog_stabilizer.config.customCaveFogBrightness": "Custom cave fog brightness",
+  "cave_fog_stabilizer.config.customCaveFogBrightness.desc": "The brightness of caves which have a custom fog color."
 }

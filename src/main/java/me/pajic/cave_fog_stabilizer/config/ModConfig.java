@@ -17,6 +17,7 @@ public class ModConfig extends Config {
     }
 
 	public ValidatedBoolean stabilizeCaveFog = new ValidatedBoolean(true);
+	public ValidatedInt standardCaveFogBrightness = new ValidatedInt(25, 100, 0);
+	public ValidatedInt customCaveFogBrightness = new ValidatedInt(25, 100, 0);
 	public ValidatedInt fogTransitionTime = new ValidatedInt(5, 10, 0);
-	public ValidatedColor stabilizedCaveFogColor = new ValidatedColor(Color.BLACK, false);
 }

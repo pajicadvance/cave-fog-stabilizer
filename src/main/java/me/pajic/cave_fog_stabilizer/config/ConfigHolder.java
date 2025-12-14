@@ -14,8 +14,12 @@ public class ConfigHolder {
 		return CONFIG.fogTransitionTime.get() * 20;
 	}
 
-	public static int getStabilizedCaveFogColor() {
-		return CONFIG.stabilizedCaveFogColor.get().toInt();
+	public static float getStandardCaveFogBrightness() {
+		return (float) CONFIG.standardCaveFogBrightness.get() / 100;
+	}
+
+	public static float getCustomCaveFogBrightness() {
+		return (float) CONFIG.customCaveFogBrightness.get() / 100;
 	}
 
 	public static void init() {}

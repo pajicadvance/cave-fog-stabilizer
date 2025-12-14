@@ -70,6 +70,10 @@ repositories {
 	maven("https://maven.fzzyhmstrs.me/") { name = "Fzzy Config" }
 	maven("https://maven.terraformersmc.com/" ) { name = "TerraformersMC" }
 	maven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
+	exclusiveContent {
+		forRepository { maven("https://api.modrinth.com/maven") { name = "Modrinth" } }
+		filter { includeGroup("maven.modrinth") }
+	}
 }
 
 dependencies {
@@ -84,4 +88,7 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
 	modImplementation("me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}")
 	modImplementation("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
+
+	modRuntimeOnly("maven.modrinth:lithostitched:nSdrLuzi")
+	modRuntimeOnly("maven.modrinth:clifftree:zMjDkRyv")
 }
