@@ -6,7 +6,15 @@ This mod prevents fog from being affected by the time of day **only when the pla
 
 Check out the Gallery tab for comparison images between this mod, vanilla after environmental fog, and vanilla before environmental fog.
 
-The mod provides a configuration when Fzzy Config is installed, but it's not required for the mod to do its thing. The configuration allows the following:
+## Compatibility
+
+- Compatible with data packs using environmental attributes introduced in 1.21.11. If a cave biome has a custom fog color different from black (common in modded cave biomes), the mod will give some brightness to the fog in order to allow the color to go through.
+- Compatible with Sodium, although the "Use Fog Occlusion" option, which is enabled by default, may cause some distant chunks in large caves to pop out of existence in certain cases, leaving holes in the distance. If this bothers you, you can disable "Use Fog Occlusion" in Sodium video settings.
+
+## Configuration
+
+The mod provides a configuration when Fzzy Config is installed, but it's **not required** for the mod to function. The configuration allows the following:
 - Toggling underground fog stabilization on and off (default enabled, obviously).
+- Changing the brightness of standard fog when it's stabilized (default 0%, matches what cave fog visuals were before).
+- Changing the brightness of custom fog when it's stabilized (default 20%, to allow cave biomes with custom fog colors to have colored fog without making them too bright).
 - Changing the time it takes to transition from environmental fog to stabilized fog and vice versa when moving between the surface and underground (default 5 seconds).
-- Changing the color the fog ends up stabilizing to after the transition time passes (default black, identical to what cave fog visuals were before).
