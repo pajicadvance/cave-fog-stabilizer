@@ -1,3 +1,1 @@
-- Added better support for cave biomes with custom fog colors. If a biome is a cave biome and has a fog color different from black, that color will be used at 20% brightness.
-- New config option "Custom cave fog brightness" that allows changing the custom fog color brightness from the default 20%.
-- Removed config option "Stabilized cave fog color", is now replaced with "Standard cave fog brigthness" which is used when the fog color is black. 0% by default.
+- Fix defaults when configuration is not available.

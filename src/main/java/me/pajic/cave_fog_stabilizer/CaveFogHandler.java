@@ -70,7 +70,7 @@ public class CaveFogHandler {
 					ConfigHolder.getStandardCaveFogBrightness() :
 					ConfigHolder.getCustomCaveFogBrightness();
 		}
-		else fogBrightness = skyBrightness = 0.25F;
+		else fogBrightness = skyBrightness = fogBaseColor.equals(Color.BLACK) ? 0 : 0.2F;
 		int fogColor = Color.HSBtoRGB(hsbFog[0], hsbFog[1], fogBrightness);
 		int skyColor = Color.HSBtoRGB(hsbSky[0], hsbSky[1], skyBrightness);
 		if (prevFogColor == Integer.MAX_VALUE) prevFogColor = fogColor;
