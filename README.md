@@ -13,8 +13,6 @@ Check out the Gallery tab for comparison images between this mod, vanilla after 
 
 ## Configuration
 
-The mod provides a configuration when Fzzy Config is installed, but it's **not required** for the mod to function. The configuration allows the following:
-- Toggling underground fog stabilization on and off (default enabled, obviously).
-- Changing the brightness of standard fog when it's stabilized (default 0%, matches what cave fog visuals were before).
-- Changing the brightness of custom fog when it's stabilized (default 20%, to allow cave biomes with custom fog colors to have colored fog without making them too bright).
-- Changing the time it takes to transition from environmental fog to stabilized fog and vice versa when moving between the surface and underground (default 5 seconds).
+The mod provides a configuration when Sodium is installed, but it's **not required** for the mod to function.
+
+![config](https://cdn.modrinth.com/data/cached_images/8c069fa4d08f302552ca4cc3a72dcf75c409eb80.png)

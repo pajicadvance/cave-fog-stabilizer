@@ -24,6 +24,9 @@
   "entrypoints": {
     "client": [
       "${group}.${id}.platform.fabric.FabricClientEntrypoint"
+    ],
+    "sodium:config_api_user": [
+      "${group}.${id}.config.CFSConfig"
     ]
   },
   "mixins": [

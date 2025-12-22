@@ -15,9 +15,8 @@ platform {
 		required("neoforge") {
 			forgeVersionRange = "[1,)"
 		}
-		optional("fzzy_config") {
-			slug("fzzy-config")
-			forgeVersionRange = "[0,)"
+		optional("sodium") {
+			slug("sodium")
 		}
 	}
 }
@@ -73,12 +72,12 @@ neoForge {
 
 repositories {
 	maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
-	maven("https://maven.fzzyhmstrs.me/") { name = "Fzzy Config" }
-	maven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
+	maven("https://maven.caffeinemc.net/releases") { name = "CaffeineMC" }
 }
 
 dependencies {
-	implementation( "me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}+neoforge")
+	compileOnlyApi("net.caffeinemc:sodium-neoforge-api:${prop("deps.sodium")}")
+	runtimeOnly("net.caffeinemc:sodium-neoforge:${prop("deps.sodium")}")
 }
 
 tasks.named("createMinecraftArtifacts") {

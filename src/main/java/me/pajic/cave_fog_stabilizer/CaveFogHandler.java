@@ -63,12 +63,12 @@ public class CaveFogHandler {
 		float fogBrightness;
 		float skyBrightness;
 		if (CFS.CONFIG_AVAILABLE) {
-			fogBrightness = fogBaseColor.equals(Color.BLACK) ?
-					ConfigHolder.getStandardCaveFogBrightness() :
-					ConfigHolder.getCustomCaveFogBrightness();
-			skyBrightness = skyBaseColor.equals(Color.BLACK) ?
-					ConfigHolder.getStandardCaveFogBrightness() :
-					ConfigHolder.getCustomCaveFogBrightness();
+			fogBrightness = (float) (fogBaseColor.equals(Color.BLACK) ?
+					ConfigHolder.options().getStandardCaveFogBrightness() :
+					ConfigHolder.options().getCustomCaveFogBrightness()) / 100;
+			skyBrightness = (float) (skyBaseColor.equals(Color.BLACK) ?
+					ConfigHolder.options().getStandardCaveFogBrightness() :
+					ConfigHolder.options().getCustomCaveFogBrightness()) / 100;
 		}
 		else fogBrightness = skyBrightness = fogBaseColor.equals(Color.BLACK) ? 0 : 0.2F;
 		int fogColor = Color.HSBtoRGB(hsbFog[0], hsbFog[1], fogBrightness);
@@ -103,10 +103,10 @@ public class CaveFogHandler {
 	}
 
 	private static boolean shouldStabilizeFog() {
-		return !CFS.CONFIG_AVAILABLE || ConfigHolder.shouldStabilizeFog();
+		return !CFS.CONFIG_AVAILABLE || ConfigHolder.options().getShouldStabilizeFog();
 	}
 
 	private static float getFogTransitionTime() {
-		return CFS.CONFIG_AVAILABLE ? ConfigHolder.getFogTransitionTime() : 100;
+		return CFS.CONFIG_AVAILABLE ? ConfigHolder.options().getFogTransitionTime() * 20 : 100;
 	}
 }

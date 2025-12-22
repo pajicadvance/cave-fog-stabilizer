@@ -1,1 +1,1 @@
-- Fix defaults when configuration is not available.
+- Mod now uses Sodium Config API for configuration.

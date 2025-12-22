@@ -19,11 +19,8 @@ platform {
 		required("fabricloader") {
 			versionRange = ">=${libs.fabric.loader.get().version}"
 		}
-		optional("fzzy_config") {
-			slug("fzzy-config")
-		}
-		optional("modmenu") {
-			slug("modmenu")
+		optional("sodium") {
+			slug("sodium")
 		}
 	}
 }
@@ -67,9 +64,7 @@ fletchingTable {
 
 repositories {
 	maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
-	maven("https://maven.fzzyhmstrs.me/") { name = "Fzzy Config" }
-	maven("https://maven.terraformersmc.com/" ) { name = "TerraformersMC" }
-	maven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
+	maven("https://maven.caffeinemc.net/releases") { name = "CaffeineMC" }
 	exclusiveContent {
 		forRepository { maven("https://api.modrinth.com/maven") { name = "Modrinth" } }
 		filter { includeGroup("maven.modrinth") }
@@ -86,9 +81,9 @@ dependencies {
 		})
 	modImplementation(libs.fabric.loader)
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
-	modImplementation("me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}")
-	modImplementation("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
+	modCompileOnlyApi("net.caffeinemc:sodium-fabric-api:${prop("deps.sodium")}")
 
+	modRuntimeOnly("net.caffeinemc:sodium-fabric:${prop("deps.sodium")}")
 	modRuntimeOnly("maven.modrinth:lithostitched:nSdrLuzi")
 	modRuntimeOnly("maven.modrinth:clifftree:zMjDkRyv")
 }

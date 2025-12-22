@@ -1,26 +1,16 @@
 package me.pajic.cave_fog_stabilizer.config;
 
-import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
-import me.fzzyhmstrs.fzzy_config.api.RegisterType;
+import me.pajic.cave_fog_stabilizer.CFS;
 
 public class ConfigHolder {
-	private static final ModConfig CONFIG = ConfigApiJava.registerAndLoadConfig(ModConfig::new, RegisterType.CLIENT);
+	private static CFSOptions CONFIG;
 
-	public static boolean shouldStabilizeFog() {
-		return CONFIG.stabilizeCaveFog.get();
+	public static CFSOptions options() {
+		if (CONFIG == null) init();
+		return CONFIG;
 	}
 
-	public static float getFogTransitionTime() {
-		return CONFIG.fogTransitionTime.get() * 20;
+	public static void init() {
+		CONFIG = CFSOptions.load(CFS.xplat().configDir().resolve("cave-fog-stabilizer-options.json").toFile());
 	}
-
-	public static float getStandardCaveFogBrightness() {
-		return (float) CONFIG.standardCaveFogBrightness.get() / 100;
-	}
-
-	public static float getCustomCaveFogBrightness() {
-		return (float) CONFIG.customCaveFogBrightness.get() / 100;
-	}
-
-	public static void init() {}
 }
