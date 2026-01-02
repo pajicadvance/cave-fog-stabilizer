@@ -1,1 +1,1 @@
-- Mod now uses Sodium Config API for configuration.
+- Changed accent color for the mod's config in the Sodium video settings screen.

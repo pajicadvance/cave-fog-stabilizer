@@ -3,7 +3,6 @@ package me.pajic.cave_fog_stabilizer.config;
 import me.pajic.cave_fog_stabilizer.CFS;
 import net.caffeinemc.mods.sodium.api.config.ConfigEntryPoint;
 import net.caffeinemc.mods.sodium.api.config.option.Range;
-import net.caffeinemc.mods.sodium.api.config.structure.ColorThemeBuilder;
 import net.caffeinemc.mods.sodium.api.config.structure.ConfigBuilder;
 import net.minecraft.network.chat.Component;
 //? if neoforge
@@ -16,7 +15,7 @@ public class CFSConfig implements ConfigEntryPoint {
 	@Override
 	public void registerConfigLate(ConfigBuilder builder) {
 		builder.registerOwnModOptions()
-				.setColorTheme(builder.createColorTheme().setFullThemeRGB(0xff969696, 0xffc8c8c8, 0xff646464))
+				.setColorTheme(builder.createColorTheme().setBaseThemeRGB(0xdaad93))
 				.addPage(builder.createOptionPage()
 						.setName(Component.translatable("cave_fog_stabilizer.config"))
 						.addOption(builder.createBooleanOption(CFS.id("stabilize_cave_fog"))
