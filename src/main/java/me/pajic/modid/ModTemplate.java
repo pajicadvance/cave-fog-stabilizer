@@ -3,11 +3,8 @@ package me.pajic.modid;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.pajic.modid.config.ModConfig;
 import me.pajic.modid.mixson.AssetPatches;
-import me.pajic.modid.mixson.DataPatches;
 import me.pajic.modid.platform.Platform;
 import net.minecraft.resources.Identifier;
-import net.ramixin.mixson.Mixson;
-import net.ramixin.mixson.enums.DebugOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,14 +22,7 @@ public class ModTemplate {
 	private static final Platform PLATFORM = createPlatformInstance();
 	public static ModConfig CONFIG = ConfigApiJava.registerAndLoadConfig(ModConfig::new);
 
-	public static void onInitialize() {
-		if (PLATFORM.isDebug()) {
-			Mixson.enableDebugOption(DebugOption.BASIC_LOGGING);
-			Mixson.enableDebugOption(DebugOption.EXTRA_LOGGING);
-			Mixson.enableDebugOption(DebugOption.EXPORT_PATCHED_FILE);
-		}
-		DataPatches.init();
-	}
+	public static void onInitialize() {}
 
 	public static void onInitializeClient() {
 		AssetPatches.init();
