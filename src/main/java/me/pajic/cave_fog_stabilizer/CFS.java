@@ -1,31 +1,27 @@
-package me.pajic.modid;
+package me.pajic.cave_fog_stabilizer;
 
-import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
-import me.pajic.modid.config.ModConfig;
-import me.pajic.modid.mixson.AssetPatches;
-import me.pajic.modid.platform.Platform;
+import me.pajic.cave_fog_stabilizer.config.ConfigHolder;
+import me.pajic.cave_fog_stabilizer.platform.Platform;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //? fabric {
-import me.pajic.modid.platform.fabric.FabricPlatform;
+import me.pajic.cave_fog_stabilizer.platform.fabric.FabricPlatform;
 //?} neoforge {
-/*import me.pajic.modid.platform.neoforge.NeoforgePlatform;
+/*import me.pajic.cave_fog_stabilizer.platform.neoforge.NeoforgePlatform;
  *///?}
 
 @SuppressWarnings("LoggingSimilarMessage")
-public class ModTemplate {
+public class CFS {
 
 	public static final String MOD_ID = /*$ mod_id*/ "modid";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	private static final Platform PLATFORM = createPlatformInstance();
-	public static ModConfig CONFIG = ConfigApiJava.registerAndLoadConfig(ModConfig::new);
-
-	public static void onInitialize() {}
+	public static final boolean CONFIG_AVAILABLE = PLATFORM.isModLoaded("sodium");
 
 	public static void onInitializeClient() {
-		AssetPatches.init();
+		if (CONFIG_AVAILABLE) ConfigHolder.init();
 	}
 
 	public static Platform xplat() {
@@ -42,9 +38,5 @@ public class ModTemplate {
 
 	public static Identifier id(String path) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);
-	}
-
-	public static void debugLog(String message, Object ... args) {
-		if (PLATFORM.isDebug()) LOGGER.info(message, args);
 	}
 }

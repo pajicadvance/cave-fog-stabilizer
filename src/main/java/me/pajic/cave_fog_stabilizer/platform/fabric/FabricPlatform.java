@@ -1,9 +1,11 @@
-package me.pajic.modid.platform.fabric;
+package me.pajic.cave_fog_stabilizer.platform.fabric;
 
 //? fabric {
 
-import me.pajic.modid.platform.Platform;
+import me.pajic.cave_fog_stabilizer.platform.Platform;
 import net.fabricmc.loader.api.FabricLoader;
+
+import java.nio.file.Path;
 
 public class FabricPlatform implements Platform {
 
@@ -13,8 +15,8 @@ public class FabricPlatform implements Platform {
 	}
 
 	@Override
-	public boolean isDevelopmentEnvironment() {
-		return FabricLoader.getInstance().isDevelopmentEnvironment();
+	public Path configDir() {
+		return FabricLoader.getInstance().getConfigDir();
 	}
 }
 //?}

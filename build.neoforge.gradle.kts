@@ -12,17 +12,14 @@ platform {
 		required("neoforge") {
 			forgeVersionRange = "[1,)"
 		}
-		required("fzzy_config") {
-			slug("fzzy-config")
-			forgeVersionRange = "[0,)"
+		optional("sodium") {
+			slug("sodium")
 		}
 	}
 }
 
 neoForge {
 	version = property("deps.neoforge") as String
-	accessTransformers.from(rootProject.file("src/main/resources/aw/${stonecutter.current.version}.cfg"))
-	validateAccessTransformers = true
 
 	runs {
 		register("client") {
@@ -47,18 +44,13 @@ neoForge {
 
 repositories {
 	mavenCentral()
-	strictMaven("https://maven.fzzyhmstrs.me/", "me.fzzyhmstrs") { name = "Fzzy Config" }
-	strictMaven("https://thedarkcolour.github.io/KotlinForForge/") { name = "KotlinForForge" }
-	strictMaven("https://jitpack.io") { name = "Jitpack" }
+	maven("https://maven.caffeinemc.net/releases") { name = "CaffeineMC" }
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
 }
 
 dependencies {
-	implementation(libs.moulberry.mixinconstraints)
-	jarJar(libs.moulberry.mixinconstraints)
-	implementation("me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}+neoforge")
-	implementation("com.github.ramixin:mixson-neoforge:${prop("deps.mixson")}")
-	jarJar("com.github.ramixin:mixson-neoforge:${prop("deps.mixson")}")
+	compileOnlyApi("net.caffeinemc:sodium-neoforge-api:${prop("deps.sodium")}")
+	runtimeOnly("net.caffeinemc:sodium-neoforge:${prop("deps.sodium")}")
 }
 
 tasks.named("createMinecraftArtifacts") {
