@@ -5,11 +5,11 @@ import net.caffeinemc.mods.sodium.api.config.ConfigEntryPoint;
 import net.caffeinemc.mods.sodium.api.config.option.Range;
 import net.caffeinemc.mods.sodium.api.config.structure.ConfigBuilder;
 import net.minecraft.network.chat.Component;
-//? if neoforge
-//import net.caffeinemc.mods.sodium.api.config.ConfigEntryPointForge;
+//? if neoforge {
+/*import net.caffeinemc.mods.sodium.api.config.ConfigEntryPointForge;
 
-//? if neoforge
-//@ConfigEntryPointForge(CFS.MOD_ID)
+@ConfigEntryPointForge(CFS.MOD_ID)
+*///?}
 public class CFSConfig implements ConfigEntryPoint {
 
 	@Override

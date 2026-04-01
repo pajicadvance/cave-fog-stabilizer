@@ -15,7 +15,7 @@ import me.pajic.cave_fog_stabilizer.platform.fabric.FabricPlatform;
 @SuppressWarnings("LoggingSimilarMessage")
 public class CFS {
 
-	public static final String MOD_ID = /*$ mod_id*/ "modid";
+	public static final String MOD_ID = /*$ mod_id*/ "cave_fog_stabilizer";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	private static final Platform PLATFORM = createPlatformInstance();
 	public static final boolean CONFIG_AVAILABLE = PLATFORM.isModLoaded("sodium");
