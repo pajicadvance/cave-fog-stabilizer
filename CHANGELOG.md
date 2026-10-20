@@ -1,0 +1,8 @@
+- Completely reworked the mod, fixing many issues:
+  - Custom cave fog colors are now handled properly and blend smoothly between neighboring biomes.
+  - Fixed fog turning black underground in dimensions without skylight, like the Nether.
+  - Fixed cave fog flickering between black and bright colors when the night vision effect is active.
+  - Fixed a fog transition time of 0 seconds breaking fog colors.
+  - Fixed the fog transition playing when joining a world or changing dimensions.
+- The mod now supports 1.21.6-26.3 on both Fabric and NeoForge.
+- The config is now handled by Fzzy Config, which is now required. On 1.21.11 and newer, the config is still available on the Sodium settings screen when it's installed.
